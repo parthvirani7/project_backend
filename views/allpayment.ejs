@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Details</title>
+      
+    <style>@import url("https://fonts.googleapis.com/css2?family=Vollkorn&display=swap");
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        width: 100%;
+        height: 100vh;
+  background: #EFECEC;
+
+        background-position: center;
+        background-repeat: repeat;
+        background-size: 300px;
+        align-items: center;
+        justify-content: center;
+
+        
+      }
+
+    
+
+
+.box {
+  position: relative;
+  margin: 40px auto;
+  width: 90%; 
+  max-width: 1000px; 
+  background: #fff;
+  border-radius: 2px;
+}
+
+.box::before,
+.box::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  width: 40%;
+  height: 10px;
+  box-shadow: 0 5px 14px rgba(0,0,0,.7);
+  z-index: -1;
+  transition: all .3s ease-in-out;
+}
+
+.box::before {
+  top: 90%;
+
+  left: 15px;
+  transform: skew(-5deg) rotate(-5deg);
+}
+
+.box::after {
+  top: 90%;
+  right: 15px;
+  transform: skew(5deg) rotate(5deg);
+}
+
+.box:hover::before,
+.box:hover::after {
+  box-shadow: 0 2px 14px rgba(0,0,0,.4);
+}
+
+.box:hover::before {
+  left: 5px;
+}
+
+.box:hover::after {
+  right: 5px;
+}
+ 
+      .l-card__text{
+
+        flex-direction: column;
+  justify-content: space-between;
+
+    padding: 35px;
+    margin: 35px;
+
+  border: 5px solid rgba(255, 255, 255, 0.66);
+  border-radius: 20px;
+  background:url("/men.jpg");
+  position: relative;
+  margin: 40px auto;
+  background: #d9dbd6 ;
+  border-radius: 2px;
+      }
+      .l-card{
+        margin: 50px;
+      }
+      div.maint {
+        font-size: 30px;
+        color: #301f1a;   
+        font-weight: 700;  
+      
+      }
+      p strongt{
+        color: #000;
+        padding: 0 10px 0 0;
+        font-size: 22px;
+        font-weight: 600 !important;
+      }
+      
+      .l-card__text p {
+        font-size: 20px;
+        font-family: "Vollkorn", serif;
+        font-weight: 400;
+        color: #000;
+        text-align: left;
+      }
+      .copied-text{
+        font-size: 16px;
+        color: black;
+        transition: .5s;
+      }
+      .copy-btn{
+        padding-bottom: 0px;
+        margin-bottom: -5px;
+        align-items: center;
+        background: transparent;
+        border: none;
+cursor: pointer;
+top: 10%;
+margin-left: 7px;
+margin-top: 10px;
+      }
+    
+  
+      svg{
+        bottom: -37%;
+    position: absolute;
+    right: 5%;
+    opacity: .1;
+    width: 260px;
+
+  }
+
+  svg.cp{
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    position: relative;
+  }
+  
+      </style>
+        <% message?.forEach(element => { %>
+
+    <body>
+      <main class="l-card">
+        <div class="l-card__text box">
+          <!-- <img src="/men.jpg" alt="" width=""> -->
+          
+            <div class="info">
+              <div class="item">
+            <p><div class="maint"><%= element.type %>
+            
+            </div></p>
+            <br>
+            <hr color="#000">
+            <br>
+          </div>
+              <p><strongt >Pay Type:</strongt> "<%= element.type %>"</p>
+              <p><strongt >Order Detail:</strongt> "<%= element.order %>"</p>
+
+              <p><strongt >Amount:</strongt> "$<%= element.totalAmount %>"</p>
+              <p><strongt >Date:</strongt> "<%= element.date %>"</p>
+              <p><strongt >User Detail:</strongt> "<%= element.user %>"</p>
+
+              <p style="align-items: center;">
+                <strongt>Restaurant Id:</strongt> "<%= element._id %>" 
+                <button class="copy-btn" data-id="<%= element._id %>">
+                  <svg class="cp" width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.9983 10C20.9862 7.82497 20.8897 6.64706 20.1213 5.87868C19.2426 5 17.8284 5 15 5H12C9.17157 5 7.75736 5 6.87868 5.87868C6 6.75736 6 8.17157 6 11V16C6 18.8284 6 20.2426 6.87868 21.1213C7.75736 22 9.17157 22 12 22H15C17.8284 22 19.2426 22 20.1213 21.1213C21 20.2426 21 18.8284 21 16V15" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M3 10V16C3 17.6569 4.34315 19 6 19M18 5C18 3.34315 16.6569 2 15 2H11C7.22876 2 5.34315 2 4.17157 3.17157C3.51839 3.82475 3.22937 4.69989 3.10149 6" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg></button>
+                <span class="copied-text" style="opacity:0;">Copied!</span>
+              </p>
+            </div>
+          
+        </div>
+      
+      </main>
+      
+        <!-- Script to handle copying the Menu Id -->
+        <script>
+          document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+              const id = button.getAttribute('data-id');
+              copyToClipboard(id, button);
+            });
+          });
+      
+          function copyToClipboard(text, button) {
+            const input = document.createElement('input');
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            
+            const copiedText = button.parentNode.querySelector('.copied-text');
+            copiedText.style.opacity = '1';
+
+            setTimeout(() => {
+              copiedText.style.opacity = '0';
+            }, 2000);
+          }
+        </script>
+      </body>
+      <% }) %>
+      
+  
+ 
+
+
+</html>
